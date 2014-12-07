@@ -1,4 +1,88 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Eric Bailey - i can haz blog?</title><description>Varyingly incoherent ramblings of a hacker/musician.</description><link>http://blog.ericb.me/</link><generator>Ghost 0.5</generator><lastBuildDate>Sat, 06 Dec 2014 22:18:02 GMT</lastBuildDate><atom:link href="http://blog.ericb.me/author/eric/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>icanhazip.com</title><description>&lt;p&gt;Often, I find myself needing to know the public IP address of a box I'm hacking on. &lt;a href="http://icanhazip.com/" target="_blank"&gt;icanhazip.com&lt;/a&gt; has become my favorite tool for the task.&lt;/p&gt;
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Eric Bailey - i can haz blog?</title><description>Varyingly incoherent ramblings of a hacker/musician.</description><link>http://blog.ericb.me/</link><generator>Ghost 0.5</generator><lastBuildDate>Sun, 07 Dec 2014 22:51:09 GMT</lastBuildDate><atom:link href="http://blog.ericb.me/author/eric/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>(define the-dream (+ 'scheme 'lilypond))</title><description>&lt;p&gt;&lt;img src="http://blog.ericb.me/content/images/2014/12/output.png" alt="Lilypond Output"&gt;&lt;/p&gt;
+
+&lt;p&gt;Lately I've gotten increasingly obsessed with &lt;a href="http://www.paulgraham.com/lisphistory.html" target="_blank"&gt;Lisp family of programming languages&lt;/a&gt; and am determined to write as little non-Lisp code as possible.&lt;/p&gt;
+
+&lt;p&gt;As such, I've started experimenting with writing more &lt;a href="http://www.lilypond.org/doc/v2.19/Documentation/extending/scheme-in-lilypond" target="_blank"&gt;Scheme in Lilypond&lt;/a&gt;. This is an entirely impractical example, but it gives a glimpse of what's possible. I can't wait to start &lt;a href="http://www.gnu.org/software/guile/manual/guile.html#List-Mapping" target="_blank"&gt;&lt;code&gt;map&lt;/code&gt;ping&lt;/a&gt; lists of musical expressions and &lt;a href="http://lilypondblog.org/2014/07/trees-music-and-lilypond/" target="_blank"&gt;representing music as trees&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note to self&lt;/strong&gt;: Dive deeper into &lt;a href="http://lilypondblog.org/2014/03/music-functions-1-getting-to-grips-with-scheme-in-lilypond/" target="_blank"&gt;these&lt;/a&gt; &lt;a href="http://lilypondblog.org/2014/03/music-functions-2-start-doing-something-useful/" target="_blank"&gt;pertinent&lt;/a&gt; &lt;a href="http://lilypondblog.org/2014/04/music-functions-3-reusing-code/" target="_blank"&gt;blog&lt;/a&gt; &lt;a href="http://lilypondblog.org/2014/04/music-functions-4-recursion/" target="_blank"&gt;posts&lt;/a&gt; ASAP.&lt;/p&gt;
+
+&lt;h2 id="the_dreamscm"&gt;&lt;code&gt;the_dream.scm:&lt;/code&gt;&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class="language-scheme"&gt;(ly:set-option 'midi-extension "mid")
+
+(define changes
+  (make-hash-table 4))
+
+(hashq-set!
+  riffs 'I
+  #{
+    \mark \markup { I }
+    f4 a c d | f d c a |
+    f4 a c d | ees d c b |
+    #})
+
+(hashq-set!
+  riffs 'IV
+  #{
+    \mark \markup { IV }
+    bes4 d f g | bes g f d |
+    #})
+
+(hashq-set!
+  riffs 'I'
+  #{
+    \mark \markup { "I'" }
+    f,4 a c d | f d c a |
+    #})
+
+(hashq-set!
+  riffs 'V
+  #{
+    \mark \markup { V }
+    g a bes b | c bes a g |
+    #})
+
+(hashq-set!
+  riffs 'turnaround
+  #{
+    f4 f aes aes | g g ges c |
+    #})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h2 id="the_dreamly"&gt;&lt;code&gt;the_dream.ly:&lt;/code&gt;&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class="language-latex"&gt;\version "2.19.6"
+\include "lilypond-book-preamble.ly"
+\paper { oddFooterMarkup = ##f }
+
+#(load "test-01.scm")
+
+\score {
+  \relative c' {
+    #(hashq-ref riffs 'I)
+    \break
+    #(hashq-ref riffs 'IV)
+    #(hashq-ref riffs 'I')
+    \break
+    #(hashq-ref riffs 'V)
+    #(hashq-ref riffs 'turnaround)
+    \bar "|."
+  }
+  \layout { indent = 0 }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h2 id="make_it_rainsh"&gt;&lt;code&gt;make_it_rain.sh:&lt;/code&gt;&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class="language-bash"&gt;#!/usr/bin/env bash
+
+lilypond "the_dream.ly"  
+convert -density 200 "the_dream.pdf" -flatten "output.png"  
+&lt;/code&gt;&lt;/pre&gt;</description><link>http://blog.ericb.me/2014/12/07/the-dream-scheme-lilypond/</link><guid isPermaLink="false">eed057e5-1888-43d8-be37-251b07a2996d</guid><dc:creator>Eric Bailey</dc:creator><pubDate>Sun, 07 Dec 2014 22:47:00 GMT</pubDate></item><item><title>icanhazip.com</title><description>&lt;p&gt;Often, I find myself needing to know the public IP address of a box I'm hacking on. &lt;a href="http://icanhazip.com/" target="_blank"&gt;icanhazip.com&lt;/a&gt; has become my favorite tool for the task.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class="language-bash"&gt;𝛌 curl icanhazip.com # yass, u can
 &lt;/code&gt;&lt;/pre&gt;
