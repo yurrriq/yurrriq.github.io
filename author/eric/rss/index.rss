@@ -1,4 +1,22 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Eric Bailey - i can haz blog?</title><description>Varyingly incoherent ramblings of a hacker/musician.</description><link>http://blog.ericb.me/</link><generator>Ghost 0.5</generator><lastBuildDate>Sat, 03 Jan 2015 23:18:41 GMT</lastBuildDate><atom:link href="http://blog.ericb.me/author/eric/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>exercism.io</title><description>&lt;p&gt;&lt;a href="http://xkcd.com/353/" target="_blank"&gt;Hello, world!&lt;/a&gt; I started working on the Clojure exercises from &lt;a href="http://exercism.io/" target="_blank"&gt;exercism.io&lt;/a&gt;.&lt;/p&gt;
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Eric Bailey - i can haz blog?</title><description>Varyingly incoherent ramblings of a hacker/musician.</description><link>http://blog.ericb.me/</link><generator>Ghost 0.5</generator><lastBuildDate>Sun, 01 Feb 2015 23:28:15 GMT</lastBuildDate><atom:link href="http://blog.ericb.me/author/eric/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>#'clj-util.get-some/get-some</title><description>&lt;p&gt;Sometimes I have a map with a number of different potential keys of interest, e.g. the &lt;a href="https://github.com/ring-clojure/ring/blob/ead617ee338e9f50c5380333ebfed87a747496dd/SPEC#L84-L87" target="_blank"&gt;&lt;code&gt;:headers&lt;/code&gt;&lt;/a&gt; of a Ring request map. In such a case, I might want to get the value of the first of those keys that's present.&lt;/p&gt;
+
+&lt;p&gt;For this rare (but not quite edge) case, I wrote a simple loop to &lt;a href="https://www.youtube.com/watch?v=CwQHwx-sjlw" target="_blank"&gt;get some&lt;/a&gt; value of interest.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-clojure"&gt;(defn get-some [m &amp;amp; ks]
+  (loop [ks ks]
+    (when (seq ks)
+      (or (get m (first ks))
+          (recur (rest ks))))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h2 id="seealso"&gt;See Also&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/gdeer81/marginalia" target="_blank"&gt;Marginalia&lt;/a&gt;-generated &lt;a href="http://yurrriq.github.io/clj-util/clj-util.get-some.html" target="_blank"&gt;"literate" source&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/yurrriq/clj-util" target="_blank"&gt;clj-util on GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description><link>http://blog.ericb.me/2015/02/01/get-some/</link><guid isPermaLink="false">e38f8736-f752-4df2-b61b-d8ca9dd210c8</guid><dc:creator>Eric Bailey</dc:creator><pubDate>Sun, 01 Feb 2015 23:05:00 GMT</pubDate></item><item><title>exercism.io</title><description>&lt;p&gt;&lt;a href="http://xkcd.com/353/" target="_blank"&gt;Hello, world!&lt;/a&gt; I started working on the Clojure exercises from &lt;a href="http://exercism.io/" target="_blank"&gt;exercism.io&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Feel free to &lt;a href="http://help.exercism.io/nitpicking-code.html" target="_blank"&gt;nitpick&lt;/a&gt; &lt;a href="http://exercism.io/yurrriq" target="_blank"&gt;my solutions&lt;/a&gt;, and browse the source &lt;a href="https://github.com/yurrriq/exercism/tree/master/clojure" target="_blank"&gt;on GitHub&lt;/a&gt;.&lt;/p&gt;
 
