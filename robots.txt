@@ -1,3 +1,0 @@
-User-agent: *
-Sitemap: http://blog.ericb.me/sitemap.xml
-Disallow: /ghost/

@@ -1,0 +1,3 @@
+#+STARTUP: showall
+* :skull: DEPRECATED blog
+This old [[http://ghost.org][Ghost]][[https://github.com/axitkhurana/buster/][Buster]] blog has been superseded by [[https://jaspervdj.be/hakyll/][Hakyll]] and [[http://orgmode.org][Org]] one [[https://github.com/yurrriq/blorg][here]].
